@@ -1,4 +1,4 @@
-/* The 3 * n + 1 problem
+/* the 3 * n + 1 problem
  * pc110101
  * uva100 */
 
