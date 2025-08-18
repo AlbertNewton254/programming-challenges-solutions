@@ -10,7 +10,7 @@ int is_valid_number(int number) {
 	return (number > 0) && (number < MAX_NUMBER);
 }
 
-int collatz_length(int number) {
+int collatz_length(long long number) {
 	int length;
 
 	length = 1;
