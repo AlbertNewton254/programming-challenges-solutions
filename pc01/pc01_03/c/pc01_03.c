@@ -21,20 +21,20 @@ double calculate_exchange(double money[], int students) {
 	double avg = total / students;
 	double avg_rounded = round_to_cent(avg);
 	
-	double positive_diff = 0.0;
-	double negative_diff = 0.0;
+	double positive_diff = 0.0; /* How much those who have more should transfer to the others? */
+	double negative_diff = 0.0; /* How much those who have less should receive? */
 	
 	for (int i = 0; i < students; i++) {
 		double diff = money[i] - avg_rounded;
 		diff = round_to_cent(diff);
 		if (diff > 0) {
-			positive_diff += diff;
+			positive_diff += diff;    
 		} else {
-			negative_diff += -diff;
+			negative_diff += -diff;   	
 		}
 	}
 	
-	return (positive_diff < negative_diff) ? positive_diff : negative_diff;
+	return (positive_diff < negative_diff) ? positive_diff : negative_diff; /* Physical constraint: cannot generate money */
 }
 
 int main(void) {
