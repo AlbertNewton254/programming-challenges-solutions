@@ -89,11 +89,10 @@ int main(void) {
 			while ((c = getchar()) != '\n' && c != EOF);
 		}
 
-		if (field_num > 1) {
-			printf("\n");
-		}
+		printf("\n");
 		printf("Field #%d:\n", field_num++);
 		grid_adjacent_mines(field, n, m);
+		printf("\n");
 	}
 
 	return 0;
