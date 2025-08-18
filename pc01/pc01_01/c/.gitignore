@@ -1,0 +1,24 @@
+# C/C++
+*.o
+*.out
+*.exe
+*.so
+*.a
+*.dll
+
+# Java
+*.class
+*.jar
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyi
+
+# IDEs/Editors
+
+.vscode/
+.idea/
+*.swp
+*~
