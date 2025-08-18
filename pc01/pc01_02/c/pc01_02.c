@@ -81,10 +81,8 @@ int main(void) {
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
-				field[i][j] = getchar();
-				
-				if (field[i][j] == '\n') {
-					j--;
+				if (scanf(" %c", &field[i][j]) != 1) {
+					break;
 				}
 			}
 
