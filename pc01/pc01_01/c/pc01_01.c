@@ -17,16 +17,18 @@ int collatz_length(long long number) {
 
 	while (1) {
 		length++;
-
+		
 		if (!(number & 1)) {
 			number = number >> 1;
 		} else {
-			number += (number << 1) +1;
+			number += (number << 1) + 1;
 		}
-
+		
 		if (number == 1) {
 			break;
 		}
+
+		
 
 	}
 
@@ -34,14 +36,14 @@ int collatz_length(long long number) {
 }
 
 int max_collatz_length(int number1, int number2) {
-	int left, right;
+	int start, end;
 	int max_length;
 
-	left = (number1 > number2) ? number1 : number2;
-	right = number1 + number2 - left;
+	start = (number1 < number2) ? number1 : number2;
+	end = number1 + number2 - start;
 	max_length = 0;
 
-	for (int number = number1; number <= number2; number++) {
+	for (int number = start; number <= end; number++) {
 		if (collatz_length(number) > max_length) {
 			max_length = collatz_length(number);
 		}
@@ -59,6 +61,14 @@ int main(void) {
 
 	if (!(is_valid_number(number1)) || !(is_valid_number(number2))) {
 		return -1;
+	}
+
+	if (number1 > number2) {
+		int tmp;
+
+		tmp = number1;
+		number1 = number2;
+		number2 = tmp;
 	}
 	
 	printf("%d %d %d\n", number1, number2, max_collatz_length(number1, number2));
