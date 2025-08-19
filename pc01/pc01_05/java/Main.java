@@ -1,3 +1,7 @@
+/* graphical editor
+ * pg110105
+ * uva 10267 */
+
 import java.util.Scanner;
 
 public class Main {
@@ -15,10 +19,9 @@ public class Main {
 
 			switch (command) {
 				case "I":
-					int cols = scanner.nextInt();
-					int rows = scanner.nextInt();
-
-					image = new Image(rows, cols);
+					int width = scanner.nextInt();
+					int height = scanner.nextInt();
+					image = new Image(width, height);
 					break;
 
 				case "C":
@@ -32,7 +35,6 @@ public class Main {
 						int x = scanner.nextInt() - 1;
 						int y = scanner.nextInt() - 1;
 						char color = scanner.next().charAt(0);
-
 						image.colorPixel(x, y, color);
 					}
 					break;
@@ -43,7 +45,6 @@ public class Main {
 						int y1 = scanner.nextInt() - 1;
 						int y2 = scanner.nextInt() - 1;
 						char color = scanner.next().charAt(0);
-
 						image.drawVerticalLine(x, y1, y2, color);
 					}
 					break;
@@ -54,20 +55,18 @@ public class Main {
 						int x2 = scanner.nextInt() - 1;
 						int y = scanner.nextInt() - 1;
 						char color = scanner.next().charAt(0);
-
-						image.drawVerticalLine(x1, x2, y, color);
+						image.drawHorizontalLine(x1, x2, y, color);
 					}
 					break;
 
 				case "K":
 					if (image != null) {
 						int x1 = scanner.nextInt() - 1;
-						int x2 = scanner.nextInt() - 1;
 						int y1 = scanner.nextInt() - 1;
+						int x2 = scanner.nextInt() - 1;
 						int y2 = scanner.nextInt() - 1;
 						char color = scanner.next().charAt(0);
-
-						image.drawRectangle(x1, x2, y1, y2, color);
+						image.drawRectangle(x1, y1, x2, y2, color);
 					}
 					break;
 
@@ -76,11 +75,19 @@ public class Main {
 						int x = scanner.nextInt() - 1;
 						int y = scanner.nextInt() - 1;
 						char color = scanner.next().charAt(0);
-
 						image.fillRegion(x, y, color);
+					}
+					break;
+
+				case "S":
+					String filename = scanner.next();
+					if (image != null) {
+						System.out.println(filename);
+						System.out.println(image.toString());
 					}
 					break;
 			}
 		}
+		scanner.close();
 	}
 }
