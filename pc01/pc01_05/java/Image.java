@@ -29,43 +29,39 @@ class Image {
 	}
 
 	public void drawVerticalLine(int x, int y1, int y2, char color) {
-		if (!isValidCoordinate(x, y1) || !isValidCoordinate(x, y2)) {
-			return;
-		}
-
 		int start = Math.min(y1, y2);
 		int end = Math.max(y1, y2);
 
 		for (int y = start; y <= end; y++) {
-			pixels[y][x] = color;
+			if (isValidCoordinate(x, y)) {
+				pixels[y][x] = color;
+			}
 		}
 	}
 
 	public void drawHorizontalLine(int x1, int x2, int y, char color) {
-		if (!isValidCoordinate(x1, y) || !isValidCoordinate(x1, y)) {
-			return;
-		}
-
 		int start = Math.min(x1, x2);
 		int end = Math.max(x1, x2);
 
 		for (int x = start; x <= end; x++) {
-			pixels[y][x] = color;
+			if (isValidCoordinate(x, y)) {
+				pixels[y][x] = color;
+			}
 		}
 	}
 
 	public void drawRectangle(int x1, int y1, int x2, int y2, char color) {
-		if (!isValidCoordinate(x1, y1) || !isValidCoordinate(x2, y2)) {
-			return;
-		}
-
 		int startX = Math.min(x1, x2);
 		int endX = Math.max(x1, x2);
 		int startY = Math.min(y1, y2);
 		int endY = Math.max(y1, y2);
 
-		for (int y = startY; y < endY; y++) {
-			drawHorizontalLine(startX, endX, y, color);
+		for (int y = startY; y <= endY; y++) {
+			for (int x = startX; x <= endX; x++) {
+				if (isValidCoordinate(x, y)) {
+					pixels[y][x] = color;
+				}
+			}
 		}
 	}
 
@@ -103,15 +99,15 @@ class Image {
 			for (int j = 0; j < width; j++) {
 				sb.append(pixels[i][j]);
 			}
-				if (i < height -1) {
-					sb.append('n');
-				}
+			if (i < height - 1) {
+				sb.append('\n');
 			}
-
-			return sb.toString();
 		}
 
+		return sb.toString();
+	}
+
 	private boolean isValidCoordinate(int x, int y) {
-		return (x >= 0 && x < width && y > 0 && y < width);
+		return (x >= 0 && x < width && y >= 0 && y < height);
 	}
 }
