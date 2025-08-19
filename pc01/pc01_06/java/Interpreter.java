@@ -5,125 +5,126 @@
 import java.util.Scanner;
 
 public class Interpreter {
-	private final int REGISTERS = 10;
-	private final int RAMSIZE = 1000;
+    private final int REGISTERS = 10;
+    private final int RAMSIZE = 1000;
 
-	private int[] registers;
-	private String[] ram;
+    public int[] registers;
+    public String[] ram;
 
-	private int programCounter;
-	private int instructionsExecuted;
+    public int programCounter;
+    public int instructionsExecuted;
 
-	public Interpreter() {
-		this.registers = new int[REGISTERS];
-		this.ram = new String[RAMSIZE];
+    public Interpreter() {
+        this.registers = new int[REGISTERS];
+        this.ram = new String[RAMSIZE];
+        initialize();
+    }
 
-		this.programCounter = 0;
-		this.instructionsExecuted = 0;
+    public void initialize() {
+        for (int i = 0; i < REGISTERS; i++) {
+            registers[i] = 0;
+        }
 
-		initialize();
-	}
+        for (int i = 0; i < RAMSIZE; i++) {
+            ram[i] = "000";
+        }
 
-	public void initialize() {
-		for (int i = 0; i < REGISTERS; i++) {
-			registers[i] = 0;
-		}
+        programCounter = 0;
+        instructionsExecuted = 0;
+    }
 
-		for (int i = 0; i < RAMSIZE; i++) {
-			ram[i] = "000";
-		}
+    public void loadProgram(Scanner scanner) {
+        int address = 0;
 
-		programCounter = 0;
-		instructionsExecuted = 0;
-	}
+        while (address < RAMSIZE && scanner.hasNextLine()) {
+            String line = scanner.nextLine().trim();
 
-	public void loadProgram(Scanner scanner) {
-		int address = 0;
+            if (line.isEmpty()) {
+                if (address == 0) {
+                    continue;
+                } else {
+                    break;
+                }
+            }
 
-		while (address < RAMSIZE && scanner.hasNextLine()) {
-			String line = scanner.nextLine().trim();
+            if (line.length() == 3 && line.matches("\\d{3}")) {
+                ram[address] = line;
+                address++;
+            }
+        }
+    }
 
-			if (line.isEmpty()) {
-				break;
-			}
+    public void execute() {
+        boolean running = true;
 
-			ram[address] = line;
-			address++;
-		}
-	}
+        while (running && programCounter < RAMSIZE) {
+            String instruction = ram[programCounter];
+            int opcode = Integer.parseInt(instruction.substring(0, 1));
+            int d = Integer.parseInt(instruction.substring(1, 2));
+            int n = Integer.parseInt(instruction.substring(2, 3));
 
-	public void executeProgram() {
-		boolean running = true;
+            instructionsExecuted++;
 
-		while (running && programCounter < RAMSIZE) {
-			String instruction = ram[programCounter];
+            switch (opcode) {
+                case 0:
+                    if (registers[n] != 0) {
+                        programCounter = registers[d];
+                    } else {
+                        programCounter++;
+                    }
+                    break;
 
-			int opcode = Integer.parseInt(instruction.substring(0,1));
-			int d = Integer.parseInt(instruction.substring(1, 2));
-			int n = Integer.parseInt(instruction.substring(2, 3));
+                case 1:
+                    if (instruction.equals("100")) {
+                        running = false;
+                    } else {
+                        programCounter++;
+                    }
+                    break;
 
-			instructionsExecuted++;
+                case 2:
+                    registers[d] = n;
+                    programCounter++;
+                    break;
 
-			switch (opcode) {
-				case 0:
-					if (registers[n] != 0) {
-						programCounter = registers[d];
-					} else {
-						programCounter++;
-					}
-					break;
+                case 3:
+                    registers[d] = (registers[d] + n) % 1000;
+                    programCounter++;
+                    break;
 
-				case 1:
-					if (d == 0 && n == 0) {
-						running = false;
-					} else {
-						programCounter++;
-					}
-					break;
+                case 4:
+                    registers[d] = (registers[d] * n) % 1000;
+                    programCounter++;
+                    break;
 
-				case 2:
-					registers[d] = n;
-					programCounter++;
-					break;
+                case 5:
+                    registers[d] = registers[n];
+                    programCounter++;
+                    break;
 
-				case 3:
-					registers[d] = (registers[d] + n) % 1000;
-					programCounter++;
-					break;
+                case 6:
+                    registers[d] = (registers[d] + registers[n]) % 1000;
+                    programCounter++;
+                    break;
 
-				case 4:
-					registers[d] = (registers[d] * n) % 1000;
-					programCounter++;
-					break;
+                case 7:
+                    registers[d] = (registers[d] * registers[n]) % 1000;
+                    programCounter++;
+                    break;
 
-				case 5:
-					registers[d] = registers[n];
-					programCounter++;
-					break;
+                case 8:
+                    registers[d] = Integer.parseInt(ram[registers[n]]);
+                    programCounter++;
+                    break;
 
-				case 6:
-					registers[d] = (registers[d] + registers[n]) % 1000;
-					programCounter++;
-					break;
+                case 9:
+                    ram[registers[n]] = String.format("%03d", registers[d]);
+                    programCounter++;
+                    break;
 
-				case 7:
-					registers[d] = (registers[d] * registers[n]) % 1000;
-					programCounter++;
-					break;
-
-				case 8:
-					registers[d] = Integer.parseInt(ram[registers[n]]);
-					programCounter++;
-					break;
-
-				case 9:
-					ram[registers[n]] = String.format("%03d", registers[d]);
-					programCounter++;
-					break;
-
-				default:
-					programCounter++;
-			}
-		}
-	}
+                default:
+                    programCounter++;
+            }
+        }
+    }
 }
