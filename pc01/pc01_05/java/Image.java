@@ -34,7 +34,7 @@ class Image {
 		}
 
 		int start = Math.min(y1, y2);
-		int end = Math.end(y1, y2);
+		int end = Math.max(y1, y2);
 
 		for (int y = start; y <= end; y++) {
 			pixels[y][x] = color;
@@ -47,7 +47,7 @@ class Image {
 		}
 
 		int start = Math.min(x1, x2);
-		int end = Math.end(x1, x2);
+		int end = Math.max(x1, x2);
 
 		for (int x = start; x <= end; x++) {
 			pixels[y][x] = color;
@@ -64,12 +64,12 @@ class Image {
 		int startY = Math.min(y1, y2);
 		int endY = Math.max(y1, y2);
 
-		for (int i = startY; i < endY; i++) {
+		for (int y = startY; y < endY; y++) {
 			drawHorizontalLine(startX, endX, y, color);
 		}
 	}
 
-	public void fill Region(int x, int y, char newColor) {
+	public void fillRegion(int x, int y, char newColor) {
 		if (!isValidCoordinate(x, y)) {
 			return;
 		}
@@ -84,7 +84,7 @@ class Image {
 	}
 
 	private void dfsFill(int x, int y, char originalColor, char newColor) {
-		if (!isValidColor(x, y) || pixels[y][x] != originalColor) {
+		if (!isValidCoordinate(x, y) || pixels[y][x] != originalColor) {
 			return;
 		}
 
@@ -97,10 +97,10 @@ class Image {
 	}
 
 	public String toString() {
-		Stringbuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		
 		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width: j++) {
+			for (int j = 0; j < width; j++) {
 				sb.append(pixels[i][j]);
 			}
 				if (i < height -1) {
@@ -112,5 +112,6 @@ class Image {
 		}
 
 	private boolean isValidCoordinate(int x, int y) {
-		return x >= 0 && x < width && y > 0 && y < width);
+		return (x >= 0 && x < width && y > 0 && y < width);
 	}
+}
