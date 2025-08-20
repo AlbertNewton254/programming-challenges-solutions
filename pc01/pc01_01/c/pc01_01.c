@@ -55,23 +55,30 @@ int max_collatz_length(int number1, int number2) {
 int main(void) {
 	int number1, number2;
 
-	if (scanf("%d%d", &number1, &number2) != 2) {
-		return -1;
-	}
+	while (1) {
+		int scan = scanf("%d%d", &number1, &number2);
 
-	if (!(is_valid_number(number1)) || !(is_valid_number(number2))) {
-		return -1;
-	}
+		if (scan == EOF) {
+			break;
+		} else if (scan == 2) {
 
-	if (number1 > number2) {
-		int tmp;
+			if (!(is_valid_number(number1)) || !(is_valid_number(number2))) {
+				return -1;
+			}
 
-		tmp = number1;
-		number1 = number2;
-		number2 = tmp;
-	}
+			if (number1 > number2) {
+				int tmp;
+
+				tmp = number1;
+				number1 = number2;
+				number2 = tmp;
+			}
 	
-	printf("%d %d %d\n", number1, number2, max_collatz_length(number1, number2));
+			printf("%d %d %d\n", number1, number2, max_collatz_length(number1, number2));
+		} else {
+			return -1;
+		}
+	}
 
 	return 0;
 }
