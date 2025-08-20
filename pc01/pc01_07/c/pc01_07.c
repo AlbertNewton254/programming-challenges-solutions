@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-const int SIZE = 8;
+#define SIZE 8 /* int: Board dimension (8x8) */
 
 int black_pawn_dirs[8][2] = {
 	{-1, -1},
@@ -50,7 +50,7 @@ typedef struct {
 } Piece;
 
 typedef struct {
-	char board[SIZE][SIZE];
+	char board[8][8];
 	Piece white_king;
 	Piece black_king;
 } Chess;
@@ -110,31 +110,26 @@ int is_attacked_by_piece(Chess chess, int is_white, Piece piece) {
 int is_in_check(Chess chess, int is_white) {
 	Piece attacker;
 
-	// Check pawn attacks
 	init_piece(&attacker, (is_white ? 'p' : 'P'), 0, (is_white ? black_pawn_dirs : white_pawn_dirs));
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
 		return 1;
 	}
 
-	// Check knight attacks
 	init_piece(&attacker, (is_white ? 'n' : 'N'), 0, knight_dirs);
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
 		return 1;
 	}
 
-	// Check rook attacks
 	init_piece(&attacker, (is_white ? 'r' : 'R'), 1, rook_dirs);
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
 		return 1;
 	}
 
-	// Check bishop attacks
 	init_piece(&attacker, (is_white ? 'b' : 'B'), 1, bishop_dirs);
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
 		return 1;
 	}
 
-	// Check queen attacks
 	init_piece(&attacker, (is_white ? 'q' : 'Q'), 1, queen_dirs);
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
 		return 1;
@@ -151,7 +146,6 @@ int main(void) {
 		int empty = 1;
 		Chess chess;
 
-		// Read board and initialize chess structure
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				scanf(" %c", &input_board[i][j]);
@@ -161,7 +155,6 @@ int main(void) {
 					empty = 0;
 				}
 				
-				// Find king positions
 				if (input_board[i][j] == 'K') {
 					chess.white_king.row = i;
 					chess.white_king.col = j;
