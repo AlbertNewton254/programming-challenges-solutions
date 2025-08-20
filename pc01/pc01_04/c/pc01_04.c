@@ -87,7 +87,7 @@ int main(void) {
 	int scale, number;
 	
 	while (1) {
-		if (scanf("%d %d", &number, &scale) != 2 || (number == 0 && scale == 0)) {
+		if (scanf("%d %d", &scale, &number) != 2 || (number == 0 && scale == 0)) {
 			break;
 		}
 
