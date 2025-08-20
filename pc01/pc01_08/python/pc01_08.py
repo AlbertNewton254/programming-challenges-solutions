@@ -30,7 +30,7 @@ def main():
             index += 1
 
         eliminated = [False] * number_of_candidates
-        current_preference = [0] * number_of_candidates
+        current_preference = [0] * len(votes)
 
         while True:
             count = [0] * number_of_candidates
@@ -38,9 +38,9 @@ def main():
 
             for i in range(len(votes)):
                 while (current_preference[i] < number_of_candidates and eliminated[votes[i][current_preference[i]] - 1]):
-                    current_preference += 1
+                    current_preference[i] += 1
 
-                if (current_preference < number_of_candidates):
+                if (current_preference[i] < number_of_candidates):
                     candidate_idx = votes[i][current_preference[i]] - 1
                     count[candidate_idx] += 1
                     valid_votes += 1;
@@ -91,5 +91,5 @@ def main():
         if _ < t - 1:
             print()
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     main()
