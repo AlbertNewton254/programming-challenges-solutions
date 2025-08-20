@@ -45,9 +45,6 @@ void number_adjacent_mines(char field[MAX_NUMBER][MAX_NUMBER], int n, int m, int
 void line_adjacent_mines(char field[MAX_NUMBER][MAX_NUMBER], int n, int m, int line) {
 	for (int col = 0; col < m; col++) {
 		number_adjacent_mines(field, n, m, line, col);
-		if (col < m - 1) {
-			printf(" ");
-		}
 	}
 	printf("\n");
 }
