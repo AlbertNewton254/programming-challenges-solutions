@@ -27,6 +27,7 @@ Each chapter (`pcXX`) has subfolders for each problem (`pcXX_YY`), which in turn
 ## Languages
 
 - **C**
+- **C++**
 - **Java**
 - **Python**
 - **Others**
