@@ -38,7 +38,16 @@ Each chapter (`pcXX`) has subfolders for each problem (`pcXX_YY`), which in turn
 
 ## Contributing
 
-Contributions are welcome! Feel free to submit suggestions or improvements via pull request.
+Contributions are welcome! Please follow these steps to contribute:
+
+1. **Clone the repository** to your local machine.
+2. **Create a new branch** from `main` using your name (e.g., `john-doe`).
+3. **Follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)** for your commit messages.
+4. **Push your branch** to your fork.
+5. **Open a Pull Request** _to the `dev` branch only_.  
+   *Pull requests to `main` will not be accepted before passing through dev and being reviewed.*
+
+Feel free to submit suggestions or improvements!
 
 ## License
 
