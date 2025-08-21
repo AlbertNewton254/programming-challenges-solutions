@@ -1,0 +1,5 @@
+# This file defines code owners for the repository.
+# Lines are in the format: <pattern> <owner>
+
+# Default owners for everything in the repo
+* @AlbertNewton254 @mateuscdias @JucaGF @gabrielbringel
