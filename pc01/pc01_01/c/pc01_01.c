@@ -97,6 +97,8 @@ int main(void) {
 			return -1;
 		}
 	}
+	
+	end = clock();
 
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("Time of execution: %lf seconds\n", cpu_time_used);
