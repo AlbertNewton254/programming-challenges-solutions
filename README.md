@@ -28,7 +28,8 @@ Each chapter (`pcXX`) has subfolders for each problem (`pcXX_YY`), which in turn
 
 - **C**
 - **Java**
-- **Python** (occasionally)
+- **Python**
+- **Others**
 
 ## How to Use
 
