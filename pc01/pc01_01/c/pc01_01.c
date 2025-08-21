@@ -3,34 +3,43 @@
  * uva100 */
 
 #include <stdio.h>
+#include <string.h>
 #include <time.h>
 
-const int MAX_NUMBER = (int) 1E6;
+#define MAX_NUMBER 1000000
+
+int memo[MAX_NUMBER + 10];
+
+int init_memo(void) {
+	memset(memo, 0, sizeof(memo));
+	memo[1] = 1;
+}
 
 int is_valid_number(int number) {
 	return (number > 0) && (number < MAX_NUMBER);
 }
 
+long long next_collatz(long long number) {
+	if (!(number & 1)) {
+		return number >> 1;
+	} else {
+		return number + (number << 1) + 1;
+	}
+}
+
 int collatz_length(long long number) {
-	int length;
+	if (number == 1) {
+		return 1;
+	}
 
-	length = 1;
+	if (is_valid_number(number) && memo[number] != 0) {
+		return memo[number];
+	}
 
-	while (1) {
-		length++;
-		
-		if (!(number & 1)) {
-			number = number >> 1;
-		} else {
-			number += (number << 1) + 1;
-		}
-		
-		if (number == 1) {
-			break;
-		}
+	int length = 1 + collatz_length(next_collatz(number));
 
-		
-
+	if (is_valid_number(number)) {
+		memo[number] = length;
 	}
 
 	return length;
@@ -56,8 +65,11 @@ int max_collatz_length(int number1, int number2) {
 int main(void) {
 	clock_t start, end;
 	double cpu_time_used;
-
+	
 	start = clock();
+
+	init_memo();
+	collatz_length(MAX_NUMBER);
 
 	int number1, number2;
 
@@ -85,8 +97,6 @@ int main(void) {
 			return -1;
 		}
 	}
-
-	end = clock();
 
 	cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
 	printf("Time of execution: %lf seconds\n", cpu_time_used);
