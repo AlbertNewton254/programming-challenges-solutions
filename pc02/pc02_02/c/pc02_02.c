@@ -9,6 +9,14 @@
 #define NCARDS 52
 #define NSUITS 4
 
+/* structure to handle poker cards */
+typedef struct {
+	int value;
+	int suit;
+} Card;
+
+/* input: char c as poker value
+ * output: c increasing order between poker values */
 int char_to_value(char c) {
 	char *values = "23456789TJQKA";
 
@@ -21,6 +29,8 @@ int char_to_value(char c) {
 	return -1;
 }
 
+/* input: char c as poker suit
+ * output: c increasing order between poker suits */
 int char_to_suit(char c) {
 	char *suits = "CDHS";
 
@@ -33,31 +43,29 @@ int char_to_suit(char c) {
 	return -1;
 }
 
-void count(char *input, int *values_count, int *suits_count) {
-	for (int i = 0; i < NCARDS / NSUITS; i++) {
-		values_count[i] = 0;
-	}
-	for (int i = 0; i < NSUITS; i++) {
-		suits_count[i] = 0;
-	}
+/* input: char array input, card arrays black and white
+ * parse input into black and white */
+void parse_inputs(char *input, Card *black, Card *white) {
+	for (int i = 0; i < 5; i++) {
+		char value_char = input[i * 3];
+		char suit_char = input[i * 3 + 1];
 
-	for (int i = 0; i < 15; i += 3) {
-		char v = input[i];
-		char s = input[i + 1];
+		black[i].value = char_to_value(value_char);
+		black[i].suit = char_to_suit(suit_char);
 
-		int val = char_to_value(v);
-		int suit = char_to_suit(s);
+		value_char = input[15 + i * 3];
+		suit_char = input[15 + i * 3 + 1];
 
-		if (val != -1) {
-			values_count[val]++;
-		}
-		if (suit != -1) {
-			suits_count[suit]++;
-		}
+		white[i].value = char_to_value(value_char);
+		white[i].suit = char_to_suit(suit_char);
 	}
 }
 
-/* Something */
+/* sort a card array */
+void sort_hand(Card *hand) {
+	/* Something */
+	return;
+}
 
 int main(void) {
 	char input[MAX_BUFFER_SIZE];
@@ -68,13 +76,15 @@ int main(void) {
 			*last = '\0';
 		}
 
-		int black_values[NCARDS / NSUITS], black_suits[NSUITS];
-		int white_values[NCARDS / NSUITS], white_suits[NSUITS];
+		Card black[5], white[5];
 
-		count(input, black_values, black_suits);
-		count(input + 15, white_values, white_suits);
+		parse_inputs(input, black, white);
 
-		/* Something */
+		 /* sort black and white
+		 * decide black and white hand types
+		 * compare
+		 * while still able to compare 
+		 * if no tie somewhere break */
 	}
 
 	return 0;
