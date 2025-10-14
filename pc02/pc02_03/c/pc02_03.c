@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 int calculate_hartal_days(int N, int *h, int P) {
-	int *days = calloc(N + 1, sizeof(char));
+	char *days = (char *)calloc(N + 1, sizeof(char));
 	int hartal_days = 0;
 
 	for (int i = 0; i < P; i++) {
