@@ -1,10 +1,11 @@
 """
-australian voting
+Australian voting
 pc110108
 uva10142
 """
 
 import sys
+
 
 def main():
     data = sys.stdin.read().splitlines()
@@ -34,18 +35,19 @@ def main():
 
         while True:
             count = [0] * number_of_candidates
-            valid_votes = 0;
+            valid_votes = 0
 
             for i in range(len(votes)):
-                while (current_preference[i] < number_of_candidates and eliminated[votes[i][current_preference[i]] - 1]):
+                while (current_preference[i] < number_of_candidates and
+                       eliminated[votes[i][current_preference[i]] - 1]):
                     current_preference[i] += 1
 
-                if (current_preference[i] < number_of_candidates):
+                if current_preference[i] < number_of_candidates:
                     candidate_idx = votes[i][current_preference[i]] - 1
                     count[candidate_idx] += 1
-                    valid_votes += 1;
+                    valid_votes += 1
 
-            if (valid_votes == 0):
+            if valid_votes == 0:
                 break
 
             max_votes = max(count)
@@ -76,9 +78,9 @@ def main():
         winners = []
 
         if valid_votes == 0:
-            for i in ranger(number_of_candidates):
+            for i in range(number_of_candidates):
                 if not eliminated[i]:
-                    winners.append(candidates[i]);
+                    winners.append(candidates[i])
 
         else:
             for i in range(number_of_candidates):
@@ -90,6 +92,7 @@ def main():
 
         if _ < t - 1:
             print()
+
 
 if __name__ == '__main__':
     main()

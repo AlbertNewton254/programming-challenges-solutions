@@ -1,45 +1,53 @@
-/* check the check
+/**
+ * Check the check
  * pc110107
- * uva10196 */
+ * uva10196
+ */
 
 #include <stdio.h>
 
-#define SIZE 8 /* int: Board dimension (8x8) */
+#define SIZE 8
 
 int black_pawn_dirs[8][2] = {
 	{-1, -1},
 	{-1, 1},
-	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}
+};
 
 int white_pawn_dirs[8][2] = {
 	{1, -1},
 	{1, 1},
-	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+	{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}
+};
 
 int knight_dirs[8][2] = {
 	{-2, -1}, {-2, 1},
-	{2, -1}, {2, 1}, 
+	{2, -1}, {2, 1},
 	{-1, -2}, {-1, 2},
-	{1, -2}, {1, 2}};
+	{1, -2}, {1, 2}
+};
 
 int rook_dirs[8][2] = {
 	{-1, 0},
 	{1, 0},
 	{0, -1},
 	{0, 1},
-	{0, 0}, {0, 0}, {0, 0}, {0, 0}};
+	{0, 0}, {0, 0}, {0, 0}, {0, 0}
+};
 
-int bishop_dirs[8][2]= {
+int bishop_dirs[8][2] = {
 	{-1, -1},
 	{-1, 1},
 	{1, -1},
 	{1, 1},
-	{0, 0}, {0, 0}, {0, 0}, {0, 0}};
+	{0, 0}, {0, 0}, {0, 0}, {0, 0}
+};
 
 int queen_dirs[8][2] = {
 	{-1, -1}, {-1, 0}, {-1, 1},
 	{0, -1}, {0, 1},
-	{1, -1}, {1, 0}, {1, 1}};
+	{1, -1}, {1, 0}, {1, 1}
+};
 
 typedef struct {
 	int row;
@@ -47,19 +55,19 @@ typedef struct {
 	char name;
 	int directions[8][2];
 	int repeat;
-} Piece;
+} piece_t;
 
 typedef struct {
 	char board[8][8];
-	Piece white_king;
-	Piece black_king;
-} Chess;
+	piece_t white_king;
+	piece_t black_king;
+} chess_t;
 
 int is_valid_position(int row, int col) {
 	return (row >= 0 && row < SIZE && col >= 0 && col < SIZE);
 }
 
-void init_piece(Piece *piece, char name, int repeat, int directions[8][2]) {
+void init_piece(piece_t *piece, char name, int repeat, int directions[8][2]) {
 	piece->name = name;
 	piece->repeat = repeat;
 	for (int i = 0; i < 8; i++) {
@@ -68,9 +76,9 @@ void init_piece(Piece *piece, char name, int repeat, int directions[8][2]) {
 	}
 }
 
-int is_attacked_by_piece(Chess chess, int is_white, Piece piece) {
-	Piece king = is_white ? chess.white_king : chess.black_king;
-	
+int is_attacked_by_piece(chess_t chess, int is_white, piece_t piece) {
+	piece_t king = is_white ? chess.white_king : chess.black_king;
+
 	for (int i = 0; i < 8; i++) {
 		int row_dir = piece.directions[i][0];
 		int col_dir = piece.directions[i][1];
@@ -107,8 +115,8 @@ int is_attacked_by_piece(Chess chess, int is_white, Piece piece) {
 	return 0;
 }
 
-int is_in_check(Chess chess, int is_white) {
-	Piece attacker;
+int is_in_check(chess_t chess, int is_white) {
+	piece_t attacker;
 
 	init_piece(&attacker, (is_white ? 'p' : 'P'), 0, (is_white ? black_pawn_dirs : white_pawn_dirs));
 	if (is_attacked_by_piece(chess, is_white, attacker)) {
@@ -144,17 +152,17 @@ int main(void) {
 
 	while (1) {
 		int empty = 1;
-		Chess chess;
+		chess_t chess;
 
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				scanf(" %c", &input_board[i][j]);
 				chess.board[i][j] = input_board[i][j];
-				
+
 				if (input_board[i][j] != '.') {
 					empty = 0;
 				}
-				
+
 				if (input_board[i][j] == 'K') {
 					chess.white_king.row = i;
 					chess.white_king.col = j;

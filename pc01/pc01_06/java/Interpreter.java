@@ -1,6 +1,8 @@
-/* interpreter
- * pg110106
- * uva10033 */
+/**
+ * Interpreter
+ * pc110106
+ * uva10033
+ */
 
 import java.util.Scanner;
 
