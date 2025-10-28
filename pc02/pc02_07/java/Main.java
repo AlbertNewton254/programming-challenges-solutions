@@ -1,6 +1,8 @@
-/* contests scoreboard
+/**
+ * Contests scoreboard
  * pc110207
- * uva10258 */
+ * uva10258
+ */
 
 import java.util.*;
 
@@ -42,8 +44,8 @@ public class Main {
                 return a[0] - b[0];
             });
 
-            for (int[] row: scoreboard) {
-              System.out.printf("%d %d %d%n", row[0], row[1], row[2]);
+            for (int[] row : scoreboard) {
+                System.out.printf("%d %d %d%n", row[0], row[1], row[2]);
             }
 
             if (T > 0) System.out.println();

@@ -1,6 +1,8 @@
-/* crypt kicker
+/**
+ * Crypt kicker
  * pc110204
- * uva843 */
+ * uva843
+ */
 
 #include <stdio.h>
 #include <string.h>

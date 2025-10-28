@@ -1,6 +1,8 @@
-/* erdos numbers
+/**
+ * Erdos numbers
  * pc110206
- * uva10044 */
+ * uva10044
+ */
 
 #include <stdio.h>
 #include <stdlib.h>

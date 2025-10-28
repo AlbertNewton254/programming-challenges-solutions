@@ -1,3 +1,9 @@
+/**
+ * Shuffle
+ * pc110205
+ * uva10026
+ */
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -43,7 +49,10 @@ struct Card {
 };
 
 
-int main(void) {
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+
 	vector<Card> oldDeck(NSUITS * NCARDS);
 	vector<Card> newDeck(NSUITS * NCARDS);
 	vector<vector<int>> shuffles(100, vector<int>(52));
@@ -55,7 +64,7 @@ int main(void) {
 
 	newDeck = oldDeck;
 
-	int T; /* Test cases */
+	int T;
 
 	cin >> T;
 
@@ -68,7 +77,7 @@ int main(void) {
 
 		isFirst = false;
 
-		int n; /* Number of shuffles */
+		int n;
 		cin >> n;
 
 		for (int k = 0; k < n; k++) {
@@ -95,7 +104,7 @@ int main(void) {
 
 		for (int i = 0; i < NSUITS * NCARDS; i++) {
 			cout << valueName[oldDeck[i].value] << " of "
-				<< suitName[oldDeck[i].suit] << endl;
+				<< suitName[oldDeck[i].suit] << '\n';
 		}
 	}
 

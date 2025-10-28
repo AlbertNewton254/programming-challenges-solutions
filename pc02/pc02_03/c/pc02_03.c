@@ -1,6 +1,8 @@
-/* hartals
+/**
+ * Hartals
  * pc110203
- * uva10050 */
+ * uva10050
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,8 +31,6 @@ int calculate_hartal_days(int N, int *h, int P) {
 
 	return hartal_days;
 }
-
-
 
 int main(void) {
 	int T;

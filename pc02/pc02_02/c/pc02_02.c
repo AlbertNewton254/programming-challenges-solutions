@@ -1,6 +1,8 @@
-/* poker hands
+/**
+ * Poker hands
  * pc110202
- * uva10315 */
+ * uva10315
+ */
 
 #include <stdio.h>
 #include <string.h>
@@ -61,7 +63,7 @@ void sort_hand(card_t *hand) {
 
 	while (1) {
 		changed = 0;
-		
+
 		for (int i = 0; i < 4; i++) {
 			if (hand[i].value > hand[i + 1].value) {
 				card_t tmp = hand[i];
@@ -90,13 +92,12 @@ int is_flush(card_t *hand) {
 int is_straight(card_t *hand) {
 	for (int i = 1; i < 5; i++) {
 		if (hand[i].value != hand[i - 1].value + 1) {
-			/* Specific case due to cyclic nature of cards */
 			if (i == 4 &&
-			hand[0].value == 0 &&
-			hand[1].value == 1 &&
-			hand[2].value == 2 &&
-			hand[3].value == 3 &&
-			hand[4].value == 12) {
+				hand[0].value == 0 &&
+				hand[1].value == 1 &&
+				hand[2].value == 2 &&
+				hand[3].value == 3 &&
+				hand[4].value == 12) {
 				return 1;
 			}
 			return 0;
@@ -104,9 +105,8 @@ int is_straight(card_t *hand) {
 	}
 	return 1;
 }
-				
 
-/* Get value counts, stores in counts[13] */
+
 void get_value_counts(const card_t *hand, int *counts) {
 	for (int i = 0; i < 13; i++) {
 		counts[i] = 0;
@@ -220,7 +220,7 @@ int compare_hands(card_t *black, card_t *white) {
 	if (b_rank < w_rank) {
 		return 1;
 	}
-	
+
 	if (b_rank > w_rank) {
 		return -1;
 	}
