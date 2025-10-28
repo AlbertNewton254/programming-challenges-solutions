@@ -1,3 +1,7 @@
+/* contests scoreboard
+ * pc110207
+ * uva10258 */
+
 import java.util.*;
 
 public class Main {

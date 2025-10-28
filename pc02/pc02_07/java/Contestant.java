@@ -1,3 +1,7 @@
+/* contests scoreboard
+ * pc110207
+ * uva10258 */
+
 public class Contestant {
     int solved;
     int penalty;

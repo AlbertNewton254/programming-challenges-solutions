@@ -1,3 +1,9 @@
+"""
+contests scoreboard
+pc110207
+uva10258
+"""
+
 import sys
 
 class Contestant:
