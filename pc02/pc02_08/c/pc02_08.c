@@ -181,7 +181,6 @@ int main(void) {
 
 		/* Find best result */
 		int best_total = 0;
-		int best_score = 0;
 		int best_upper = 0;
 		int final_mask = BITMASK_SIZE - 1;
 
@@ -193,7 +192,6 @@ int main(void) {
 
 			if (total > best_total) {
 				best_total = total;
-				best_score = dp[final_mask][sum_upper];
 				best_upper = sum_upper;
 			}
 		}
