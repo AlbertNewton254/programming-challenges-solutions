@@ -1,3 +1,9 @@
+/**
+ * Yahtzee
+ * pc110208
+ * uva10149
+ */
+
 import java.util.*;
 import java.io.*;
 
