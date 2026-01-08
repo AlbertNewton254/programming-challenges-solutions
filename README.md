@@ -2,7 +2,7 @@
 
 Solutions to the book "Programming Challenges" by Steven Skiena and Miguel Revilla.
 
-## Repository Structure
+## Project Structure
 
 This repository contains solutions organized by chapter (`pcXX`) and problem number (`pcXX_YY`). Each problem may have implementations in different programming languages.
 
